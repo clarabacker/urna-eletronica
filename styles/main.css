@@ -1,0 +1,261 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@500..700&display=swap");
+* {
+  font-family: "League Spartan", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body, main {
+  min-height: 100%;
+}
+
+div {
+  display: block;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#urna-eletronica {
+  width: 63em;
+  height: 34.2em;
+  background-image: url("../imagens/design_urna_eletronica.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+}
+
+.candidato1 {
+  grid-area: candidato1;
+}
+
+.candidato2 {
+  grid-area: candidato2;
+}
+
+.candidato3 {
+  grid-area: candidato3;
+}
+
+.candidato4 {
+  grid-area: candidato4;
+}
+
+#tela {
+  width: 32.3em;
+  height: 18.51em;
+  grid-row: 6/span 13;
+  grid-column: 2/5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1.2em;
+}
+#tela #mensagem {
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 1em;
+}
+#tela #mensagem-erro {
+  display: block;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 1em;
+  color: red;
+}
+#tela .candidato {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+}
+#tela .candidato p {
+  display: block;
+}
+#tela .foto {
+  width: 7em;
+  height: 7em;
+  background-color: #06407A;
+}
+#tela .caixa {
+  width: 3em;
+  height: 3em;
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#tela .caixa .digito {
+  font-size: 2em;
+}
+
+.caixas-ativadas {
+  display: flex;
+  gap: 0.2em;
+  margin-top: 1em;
+}
+
+.caixas-desativadas {
+  display: none;
+}
+
+.candidatos-ativados {
+  display: flex;
+  gap: 0.7em;
+  margin-top: 1em;
+}
+
+.candidatos-desativados {
+  display: none;
+}
+
+.btn0 {
+  grid-area: btn0;
+}
+
+.btn1 {
+  grid-area: btn1;
+}
+
+.btn2 {
+  grid-area: btn2;
+}
+
+.btn3 {
+  grid-area: btn3;
+}
+
+.btn4 {
+  grid-area: btn4;
+}
+
+.btn5 {
+  grid-area: btn5;
+}
+
+.btn6 {
+  grid-area: btn6;
+}
+
+.btn7 {
+  grid-area: btn7;
+}
+
+.btn8 {
+  grid-area: btn8;
+}
+
+.btn9 {
+  grid-area: btn9;
+}
+
+.btnBranco {
+  grid-area: btnBranco;
+}
+
+.btnCorrige {
+  grid-area: btnCorrige;
+}
+
+.btnConfirma {
+  grid-area: btnConfirma;
+}
+
+#teclado {
+  display: grid;
+  width: 18em;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(5, 2.5em);
+  grid-template-areas: "btn1 btn2 btn3" "btn4 btn5 btn6" "btn7 btn8 btn9" "btn0 btn0 btn0" "btnBranco btnCorrige btnConfirma";
+  gap: 0.5em;
+  grid-row: 7/span 13;
+  grid-column: 7/12;
+  margin-left: 0.8em;
+  margin-top: 1.5em;
+}
+#teclado .button {
+  border: none;
+  border-radius: 0.35em;
+  outline: none;
+  background-color: #181D22;
+  color: white;
+  box-shadow: inset 0px -9px 0px -5px black;
+  transition: background-color 0.1s ease;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%; /* Para garantir que todos os botões tenham a mesma largura */
+  height: 100%;
+  text-align: center;
+}
+#teclado .button:active {
+  transform: translateY(2px);
+}
+#teclado button[data-number] {
+  font-size: 2em;
+}
+#teclado button[data-number]:active, #teclado button[data-number]:hover {
+  background-color: black;
+}
+#teclado .btn0 {
+  grid-column: 2; /* Define a posição do botão 0 na segunda coluna */
+  justify-self: center; /* Centraliza horizontalmente o botão 0 */
+  width: 100%;
+}
+#teclado .btnBranco span, #teclado .btnCorrige span, #teclado .btnConfirma span {
+  font-size: 1.2em;
+  color: black;
+}
+#teclado .btnBranco {
+  background-color: white;
+  box-shadow: inset 0px -9px 0px -5px #B4B7C0;
+}
+#teclado .btnBranco:active, #teclado .btnBranco:hover {
+  background-color: #c9dafd;
+}
+#teclado .btnCorrige {
+  background-color: hsl(6, 63%, 50%);
+  box-shadow: inset 0px -9px 0px -5px hsl(6, 70%, 34%);
+}
+#teclado .btnCorrige:active, #teclado .btnCorrige:hover {
+  background-color: hsl(6, 74%, 41%);
+}
+#teclado .btnConfirma {
+  background-color: hsl(130, 79%, 37%);
+  box-shadow: inset 0px -9px 0px -5px hsl(130, 82%, 21%);
+}
+#teclado .btnConfirma:active, #teclado .btnConfirma:hover {
+  background-color: hsl(130, 98%, 25%);
+}
+
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+  html {
+    font-size: 0.55em;
+  }
+  #teclado .btnBranco span, #teclado .btnCorrige span, #teclado .btnConfirma span {
+    font-size: 0.7em;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1024px) {
+  html {
+    font-size: 0.75em;
+  }
+  #teclado .btnBranco span, #teclado .btnCorrige span, #teclado .btnConfirma span {
+    font-size: 0.9em;
+  }
+}/*# sourceMappingURL=main.css.map */

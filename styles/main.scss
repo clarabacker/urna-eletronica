@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500..700&display=swap');
+
+@import 'base';
+
+main {
+    @include flex-properties();
+}
+
+#urna-eletronica {
+    width: 63em;
+    height: 34.2em;
+    background-image: url("../imagens/design_urna_eletronica.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: grid; 
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(14, 1fr);
+}
+
+$candidatos-grid-areas: (
+    candidato1, candidato2, candidato3, candidato4
+);
+@each $button in $candidatos-grid-areas {
+    .#{$button} {
+      grid-area: #{$button};
+    }
+}
+
+#tela {
+    width: 32.3em;
+    height: 18.51em;
+    grid-row: 6/span 13;
+    grid-column: 2/5;
+    @include flex-properties($direction: column);
+    margin-left: 1.2em;
+
+    #mensagem {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        margin-top: 1em;
+    }
+    #mensagem-erro {
+        display: block;
+        text-align: center;
+        font-size: 1em;
+        margin-top: 1em;
+        color: red;
+    }
+
+    .candidato {
+        @include flex-properties($direction: column, $gap: 0.3em);
+
+        p {
+            display: block;
+        }
+    }
+    .foto {
+        width: 7em;
+        height: 7em;
+        background-color: #06407A;
+    }
+    .caixa {
+        width: 3em;
+        height: 3em;
+        background-color: white;
+        border: 2px solid black;
+        color: black;
+        @include flex-properties();
+    
+        .digito {
+            font-size: 2em;
+        }
+    }
+}
+
+.caixas-ativadas {
+    display: flex;
+    gap: 0.2em;
+    margin-top: 1em;
+}
+.caixas-desativadas {
+    display: none;
+}
+.candidatos-ativados {
+    display: flex;
+    gap: 0.7em;
+    margin-top: 1em;
+}
+.candidatos-desativados {
+    display: none;
+}
+
+
+$button-grid-areas-teclado: (
+    btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnBranco, btnCorrige, btnConfirma
+);
+@each $button in $button-grid-areas-teclado {
+    .#{$button} {
+        grid-area: #{$button};
+    }
+}
+
+#teclado {
+    display: grid;
+    width: 18em;
+    grid-template-columns: repeat(3,minmax(0, 1fr));
+    grid-template-rows: repeat(5,2.5em);
+    grid-template-areas:
+    "btn1 btn2 btn3" "btn4 btn5 btn6" "btn7 btn8 btn9" "btn0 btn0 btn0" "btnBranco btnCorrige btnConfirma";
+    gap: 0.5em;
+    grid-row: 7/span 13;
+    grid-column: 7/12;
+    margin-left: 0.8em;
+    margin-top: 1.5em;
+
+    .button {
+        border: none;
+        border-radius: 0.35em;
+        outline: none;
+        background-color: #181D22;
+        color: white;
+        box-shadow: inset 0px -9px 0px -5px black;
+        transition: background-color 0.1s ease;
+        cursor: pointer;
+        font-weight: 700;
+
+        width: 100%; /* Para garantir que todos os botões tenham a mesma largura */
+        height: 100%;
+        text-align: center;
+
+        &:active {
+            transform: translateY(2px);
+        }
+    }
+
+    button[data-number] {
+        font-size: 2em;
+
+        &:active, &:hover {
+            background-color: black;
+        }
+    }
+    
+    .btn0 {
+        grid-column: 2; /* Define a posição do botão 0 na segunda coluna */
+        justify-self: center; /* Centraliza horizontalmente o botão 0 */
+        width: 100%;
+    }
+
+    .btnBranco, .btnCorrige, .btnConfirma {
+        span{
+            font-size: 1.2em;
+            color: black;
+        } 
+    }
+
+    .btnBranco {
+        background-color: white;
+        box-shadow: inset 0px -9px 0px -5px #B4B7C0;
+    
+        &:active, &:hover {
+            background-color: #c9dafd;
+        }
+    }
+
+    .btnCorrige {
+        background-color: hsl(6, 63%, 50%);
+        box-shadow: inset 0px -9px 0px -5px hsl(6, 70%, 34%);
+    
+        &:active, &:hover {
+            background-color: hsl(6, 74%, 41%);
+        }
+    }
+
+    .btnConfirma {
+        background-color: hsl(130, 79%, 37%);
+        box-shadow: inset 0px -9px 0px -5px hsl(130, 82%, 21%);
+    
+        &:active, &:hover {
+            background-color: hsl(130, 98%, 25%);
+        }
+    }
+}
+
+// tablets
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+    html {
+        font-size: 0.55em;
+    }
+
+    #teclado {
+        .btnBranco, .btnCorrige, .btnConfirma {
+            span{
+                font-size: 0.7em;
+            } 
+        }
+    }
+}
+@media screen and (min-width: 800px) and (max-width: 1024px) {
+    html {
+        font-size: 0.75em;
+    }
+
+    #teclado {
+        .btnBranco, .btnCorrige, .btnConfirma {
+            span{
+                font-size: 0.9em;
+            } 
+        }
+    }
+}

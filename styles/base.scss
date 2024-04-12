@@ -1,0 +1,29 @@
+* {
+    font-family: "League Spartan", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+html, body {
+    height: 100%;
+}
+  
+body, main {
+    min-height: 100%;
+}
+  
+div {
+    display: block;
+}
+
+@mixin flex-properties($display: flex, $direction: null, $justify: center, $align: center, $gap: null) {
+    display: $display;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+
+    @if $gap != null {
+        gap: $gap;
+    }
+}

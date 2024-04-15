@@ -298,7 +298,7 @@ function atualizarCandidatos() {
     candidatosElementos.forEach((candidatoElemento, index) => {
         if (index < candidatos.length) {
             const fotoElemento = candidatoElemento.querySelector('.foto')
-            fotoElemento.style.backgroundImage = `url('../imagens/${candidatos[index].foto}')`
+            fotoElemento.style.backgroundImage = `url('https://clarabacker.github.io/urna-eletronica/imagens/${candidatos[index].foto}')`
             fotoElemento.style.backgroundSize = 'cover'
             
             const nomeElemento = candidatoElemento.querySelector('p:nth-of-type(1)')

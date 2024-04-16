@@ -36,22 +36,6 @@ main {
   grid-template-rows: repeat(14, 1fr);
 }
 
-.candidato1 {
-  grid-area: candidato1;
-}
-
-.candidato2 {
-  grid-area: candidato2;
-}
-
-.candidato3 {
-  grid-area: candidato3;
-}
-
-.candidato4 {
-  grid-area: candidato4;
-}
-
 #tela {
   width: 32.3em;
   height: 18.51em;
@@ -69,24 +53,35 @@ main {
   font-size: 2em;
   margin-top: 1em;
 }
+#tela #mensagem2 {
+  margin-bottom: 0.5em;
+}
 #tela #mensagem-erro {
   display: block;
+  max-width: 80%;
   text-align: center;
   font-size: 1em;
   margin-top: 1em;
   color: red;
 }
+#tela #candidatos {
+  width: 100%;
+  padding: 0 1em;
+}
 #tela .candidato {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.3em;
+  gap: 0.5em;
 }
 #tela .candidato p {
-  display: block;
+  display: inline-block;
+  word-wrap: break-word;
+  word-break: break-all;
+  flex-grow: 1;
+  max-width: 70%;
 }
-#tela .foto {
+#tela .candidato .foto {
   width: 7em;
   height: 7em;
   background-color: #06407A;
@@ -117,12 +112,30 @@ main {
 
 .candidatos-ativados {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.7em;
   margin-top: 1em;
 }
 
 .candidatos-desativados {
   display: none;
+}
+
+#buttonEncerrarVotacao {
+  width: 2em;
+  height: 2em;
+  grid-row: 14;
+  grid-column: 5;
+  place-self: center;
+  transform: translateY(-2px);
+  transition: 0.2s ease;
+}
+#buttonEncerrarVotacao:hover {
+  cursor: pointer;
+}
+#buttonEncerrarVotacao:active {
+  transform: translateY(1px);
 }
 
 .btn0 {

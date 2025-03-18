@@ -55,6 +55,8 @@ main {
 }
 #tela #mensagem2 {
   margin-bottom: 0.5em;
+  padding: 0 1em;
+  text-align: center;
 }
 #tela #mensagem-erro {
   display: block;

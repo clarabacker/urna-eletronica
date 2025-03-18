@@ -1,78 +1,176 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Eleição de representante de turma | Colégio La Salle Abel</title>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="./imagens/rede_la_salle_logo.ico">
-    <link rel="stylesheet" href="styles/main.css">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./imagens/rede_la_salle_logo.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="styles/main.css"
+    />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" 
-    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <main>
-        <div id="urna-eletronica">
-            <div id="tela">
-                
-                <div id="candidatos" class="candidatos-desativados">
-                    <div class="candidato candidato1">
-                        <div class="foto"></div>
-                        <p>Nome do candidato</p>
-                    </div>
-                </div>
+      <div id="urna-eletronica">
+        <div id="tela">
+          <div
+            id="candidatos"
+            class="candidatos-desativados"
+          >
+            <div class="candidato candidato1">
+              <div class="foto"></div>
+              <p>Nome do candidato</p>
+            </div>
+          </div>
 
-                <p id="mensagem">Aperte "Confirma" para iniciar a votação!</p>
-                <p id="mensagem2"></p>
+          <p id="mensagem">Aperte "Confirma" para iniciar a votação!</p>
+          <p id="mensagem2"></p>
 
-                <div id="caixas-de-entrada" class="caixas-desativadas">
-                    <div class="caixa caixa1">
-                        <span class="digito digito1"></span>
-                    </div>
-
-                    <div class="caixa caixa2">
-                        <span class="digito digito2"></span>
-                    </div>
-
-                    <div class="caixa caixa3">
-                        <span class="digito digito3"></span>
-                    </div>
-                </div>
-
-                <p id="mensagem-erro"></p>
+          <div
+            id="caixas-de-entrada"
+            class="caixas-desativadas"
+          >
+            <div class="caixa caixa1">
+              <span class="digito digito1"></span>
             </div>
 
-            <div id="teclado">
-                <button class="button btn1" data-number="1"><span>1</span></button>
-                <button class="button btn2" data-number="2"><span>2</span></button>
-                <button class="button btn3" data-number="3"><span>3</span></button>
-                
-                <button class="button btn4" data-number="4"><span>4</span></button>
-                <button class="button btn5" data-number="5"><span>5</span></button>
-                <button class="button btn6" data-number="6"> <span>6</span></button>
-
-                <button class="button btn7" data-number="7"><span>7</span></button>
-                <button class="button btn8" data-number="8"><span>8</span></button>
-                <button class="button btn9" data-number="9"><span>9</span></button>
-
-                <button class="button btn0" data-number="0"><span>0</span></button>
-
-                <button class="button btnBranco" data-branco="BRANCO"><span>BRANCO</span></button>
-                <button class="button btnCorrige" data-corrige="CORRIGE"><span>CORRIGE</span></button>
-                <button class="button btnConfirma" data-confirma="CONFIRMA"><span>CONFIRMA</span></button>
+            <div class="caixa caixa2">
+              <span class="digito digito2"></span>
             </div>
 
-            <img id="buttonEncerrarVotacao" src="imagens/icon_encerrar.png"></img>
+            <div class="caixa caixa3">
+              <span class="digito digito3"></span>
+            </div>
+          </div>
+
+          <p id="mensagem-erro"></p>
         </div>
+
+        <div id="teclado">
+          <button
+            class="button btn1"
+            data-number="1"
+          >
+            <span>1</span>
+          </button>
+          <button
+            class="button btn2"
+            data-number="2"
+          >
+            <span>2</span>
+          </button>
+          <button
+            class="button btn3"
+            data-number="3"
+          >
+            <span>3</span>
+          </button>
+
+          <button
+            class="button btn4"
+            data-number="4"
+          >
+            <span>4</span>
+          </button>
+          <button
+            class="button btn5"
+            data-number="5"
+          >
+            <span>5</span>
+          </button>
+          <button
+            class="button btn6"
+            data-number="6"
+          >
+            <span>6</span>
+          </button>
+
+          <button
+            class="button btn7"
+            data-number="7"
+          >
+            <span>7</span>
+          </button>
+          <button
+            class="button btn8"
+            data-number="8"
+          >
+            <span>8</span>
+          </button>
+          <button
+            class="button btn9"
+            data-number="9"
+          >
+            <span>9</span>
+          </button>
+
+          <button
+            class="button btn0"
+            data-number="0"
+          >
+            <span>0</span>
+          </button>
+
+          <button
+            class="button btnBranco"
+            data-branco="BRANCO"
+          >
+            <span>BRANCO</span>
+          </button>
+          <button
+            class="button btnCorrige"
+            data-corrige="CORRIGE"
+          >
+            <span>CORRIGE</span>
+          </button>
+          <button
+            class="button btnConfirma"
+            data-confirma="CONFIRMA"
+          >
+            <span>CONFIRMA</span>
+          </button>
+        </div>
+
+        <img
+          id="buttonEncerrarVotacao"
+          src="imagens/icon_encerrar.png"
+        />
+
+        <audio
+          id="audioCliqueTecla"
+          src="./audios/audio_tecla.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="audioConfirmacaoVoto"
+          src="./audios/audio_confirmacao_voto.mp3"
+          preload="auto"
+        ></audio>
+      </div>
     </main>
 
-    <script src="js/main.js"></script>
-</body>
-
-</html> 
+    <script
+      type="module"
+      src="js/main.js"
+    ></script>
+  </body>
+</html>

@@ -26,10 +26,44 @@ let btnEncerrar = document.querySelector("#buttonEncerrarVotacao")
 const audioTecla = document.querySelector("#audioCliqueTecla")
 const audioConfirmacaoVoto = document.querySelector("#audioConfirmacaoVoto")
 
-// Reinicia e reproduz o áudio passado como parâmetro
+// Função para reiniciar e reproduzir o áudio passado como parâmetro
 function tocarAudio(audio) {
   audio.currentTime = 0 // Reseta o áudio, se ele estiver tocando
   audio.play()
+}
+
+// Função para mostrar ou esconder a div das caixas de entrada
+function gerenciarDivCaixasEntrada(ocultar) {
+  if (ocultar) {
+    divCaixasDeEntrada.classList.remove("caixas-ativadas")
+    divCaixasDeEntrada.classList.add("caixas-desativadas")
+  } else {
+    divCaixasDeEntrada.classList.remove("caixas-desativadas")
+    divCaixasDeEntrada.classList.add("caixas-ativadas")
+  }
+}
+
+// Função para mostrar ou esconder a div de candidatos
+function gerenciarDivDeCandidatos(ocultar) {
+  if (ocultar) {
+    divCandidatos.classList.remove("candidatos-ativados")
+    divCandidatos.classList.add("candidatos-desativados")
+  } else {
+    divCandidatos.classList.remove("candidatos-desativados")
+    divCandidatos.classList.add("candidatos-ativados")
+  }
+}
+
+// Função para atualizar a cor da borda e o display das caixas
+function atualizarCaixas(corBorda, display = undefined) {
+  caixas.forEach((caixa) => {
+    caixa.style.border = `2px solid ${corBorda}`
+
+    // Atualiza o display somente se o parâmetro 'display' for fornecido
+    if (display !== undefined) {
+      caixa.style.display = display
+    }
+  })
 }
 
 // Define o novo src quando o mouse passa por cima da imagem
@@ -49,22 +83,17 @@ btnEncerrar.onclick = function () {
   tocarAudio(audioTecla)
   console.log(votos)
 
-  divCandidatos.classList.add("candidatos-desativados")
-  divCandidatos.classList.remove("candidatos-ativados")
+  gerenciarDivDeCandidatos(true)
+  gerenciarDivCaixasEntrada(false)
 
-  divCaixasDeEntrada.classList.remove("caixas-desativadas")
-  divCaixasDeEntrada.classList.add("caixas-ativadas")
-
-  // Oculta todas as digitos de entrada
+  // Oculta todas os digitos de entrada
   document.querySelectorAll(".caixa").forEach((caixa) => {
     caixa.style.display = "none"
   })
   // Exibe apenas a primeira caixa de entrada
   document.querySelector(".caixa1").style.display = "flex"
 
-  caixas.forEach((caixa) => {
-    caixa.style.border = "2px solid black"
-  })
+  atualizarCaixas("black")
   limparDigitos()
 
   mensagem.innerText = "FIM DA VOTAÇÃO"
@@ -126,8 +155,7 @@ function atualizardigitos() {
   digitos[2].textContent = digito3
 
   if (mensagem.innerText == "Digite o número do seu candidato:") {
-    divCandidatos.classList.remove("candidatos-ativados")
-    divCandidatos.classList.add("candidatos-desativados")
+    gerenciarDivDeCandidatos(true)
   }
 }
 
@@ -161,13 +189,10 @@ function lidarComNúmeroClicado(numero) {
 
     // Verifica se o número do candidato é válido
     if (verificarNumeroCandidato(ano, turma, numeroCandidato)) {
-      divCandidatos.classList.remove("candidatos-desativados")
-      divCandidatos.classList.add("candidatos-ativados")
+      gerenciarDivDeCandidatos(false)
       atualizarCandidato(numeroCandidato)
 
-      caixas.forEach((caixa) => {
-        caixa.style.border = "2px solid black"
-      })
+      atualizarCaixas("black")
       mensagemDeErro.innerText = ""
     }
   }
@@ -180,8 +205,7 @@ function confirmar() {
 
     mensagem.innerText = "Digite o ano:"
 
-    divCaixasDeEntrada.classList.remove("caixas-desativadas")
-    divCaixasDeEntrada.classList.add("caixas-ativadas")
+    gerenciarDivCaixasEntrada(false)
 
     // Oculta todos os digitos de entrada
     document.querySelectorAll(".caixa").forEach((caixa) => {
@@ -212,30 +236,20 @@ function confirmar() {
       return
     }
 
-    caixas.forEach((caixa) => {
-      caixa.style.border = "2px solid black"
-    })
+    mensagem.innerText = "Digite a turma:"
+    mensagemDeErro.innerText = ""
+
+    atualizarCaixas("black", "flex")
     limparDigitos()
 
-    mensagem.innerText = "Digite a turma:"
-
-    divCaixasDeEntrada.classList.remove("caixas-desativadas")
-    divCaixasDeEntrada.classList.add("caixas-ativadas")
-
-    caixas.forEach((caixa) => {
-      caixa.style.display = "flex"
-    })
-
-    mensagemDeErro.innerText = ""
+    gerenciarDivCaixasEntrada(false)
 
     return
   }
 
   if (mensagem.innerText === "Digite a turma:") {
     if (digito1 == "" || digito2 == "" || digito3 == "") {
-      caixas.forEach((caixa) => {
-        caixa.style.border = "2px solid red"
-      })
+      atualizarCaixas("red")
       return
     }
 
@@ -247,24 +261,19 @@ function confirmar() {
       votos.turma = turma
       console.log(`A turma ${turma} existe no ${ano}º ano.`)
     } else {
-      caixas.forEach((caixa) => {
-        caixa.style.border = "2px solid red"
-      })
+      atualizarCaixas("red")
 
       mensagemDeErro.innerText = "Turma inválida! Tente novamente."
       console.log(`A turma ${turma} não existe no ${ano}º ano .`)
       return
     }
 
-    caixas.forEach((caixa) => {
-      caixa.style.border = "2px solid black"
-    })
+    atualizarCaixas("black")
     limparDigitos()
 
     mensagem.innerText = "Digite o número do seu candidato:"
 
-    divCaixasDeEntrada.classList.remove("caixas-desativadas")
-    divCaixasDeEntrada.classList.add("caixas-ativadas")
+    gerenciarDivCaixasEntrada(false)
 
     console.log(candidatosPorTurma[ano][turma])
 
@@ -275,9 +284,7 @@ function confirmar() {
 
   if (mensagem.innerText === "Digite o número do seu candidato:") {
     if (digito1 == "" || digito2 == "" || digito3 == "") {
-      caixas.forEach((caixa) => {
-        caixa.style.border = "2px solid red"
-      })
+      atualizarCaixas("red")
       return
     }
 
@@ -290,9 +297,7 @@ function confirmar() {
         `O número do candidato ${voto} existe na turma ${turma} do ${ano}º ano.`
       )
     } else {
-      caixas.forEach((caixa) => {
-        caixa.style.border = "2px solid red"
-      })
+      atualizarCaixas("red")
 
       mensagemDeErro.innerText = "Número inválido! Tente novamente."
       console.log(
@@ -301,39 +306,28 @@ function confirmar() {
       return
     }
 
-    caixas.forEach((caixa) => {
-      caixa.style.border = "2px solid black"
-    })
+    atualizarCaixas("black")
     limparDigitos()
 
     mensagem.innerText = "VOTO CONFIRMADO"
 
     tocarAudio(audioConfirmacaoVoto)
 
-    divCandidatos.classList.add("candidatos-desativados")
-    divCandidatos.classList.remove("candidatos-ativados")
-
-    divCaixasDeEntrada.classList.add("caixas-desativadas")
-    divCaixasDeEntrada.classList.remove("caixas-ativadas")
+    gerenciarDivDeCandidatos(true)
+    gerenciarDivCaixasEntrada(true)
 
     mensagemDeErro.innerText = ""
 
     // Após 2 segundos, restaura o estado para próxima votação
     setTimeout(function () {
-      caixas.forEach((caixa) => {
-        caixa.style.display = "flex"
-        caixa.style.border = "2px solid black"
-      })
+      atualizarCaixas("black", "flex")
       limparDigitos()
 
       mensagem2.innerHTML = ""
       mensagem.innerText = "Digite o número do seu candidato:"
 
-      divCandidatos.classList.remove("candidatos-ativados")
-      divCandidatos.classList.add("candidatos-desativados")
-
-      divCaixasDeEntrada.classList.remove("caixas-desativadas")
-      divCaixasDeEntrada.classList.add("caixas-ativadas")
+      gerenciarDivDeCandidatos(true)
+      gerenciarDivCaixasEntrada(false)
 
       console.log(candidatosPorTurma[ano][turma])
 
@@ -368,14 +362,10 @@ function confirmar() {
         mensagem2.innerHTML = ""
         mensagemDeErro.innerText = ""
 
-        caixas.forEach((caixa) => {
-          caixa.style.display = "flex"
-          caixa.style.border = "2px solid black"
-        })
+        atualizarCaixas("black", "flex")
         limparDigitos()
 
-        divCaixasDeEntrada.classList.remove("caixas-desativadas")
-        divCaixasDeEntrada.classList.add("caixas-ativadas")
+        gerenciarDivCaixasEntrada(false)
 
         return
       }
@@ -385,33 +375,22 @@ function confirmar() {
         "Digite <strong>1</strong> para gerar o PDF, <strong>2</strong> para reiniciar a votação ou <strong>3</strong> para retornar à votação."
       ) {
         // Restaura o estado para próxima votação
-        caixas.forEach((caixa) => {
-          caixa.style.border = "2px solid black"
-        })
+        atualizarCaixas("black")
         limparDigitos()
 
-        divCandidatos.classList.add("candidatos-desativados")
-        divCandidatos.classList.remove("candidatos-ativados")
-
-        divCaixasDeEntrada.classList.add("caixas-desativadas")
-        divCaixasDeEntrada.classList.remove("caixas-ativadas")
+        gerenciarDivDeCandidatos(true)
+        gerenciarDivCaixasEntrada(true)
 
         mensagemDeErro.innerText = ""
 
-        caixas.forEach((caixa) => {
-          caixa.style.display = "flex"
-          caixa.style.border = "2px solid black"
-        })
+        atualizarCaixas("black", "flex")
         limparDigitos()
 
         mensagem2.innerHTML = ""
         mensagem.innerText = "Digite o número do seu candidato:"
 
-        divCandidatos.classList.remove("candidatos-ativados")
-        divCandidatos.classList.add("candidatos-desativados")
-
-        divCaixasDeEntrada.classList.remove("caixas-desativadas")
-        divCaixasDeEntrada.classList.add("caixas-ativadas")
+        gerenciarDivDeCandidatos(true)
+        gerenciarDivCaixasEntrada(false)
 
         console.log(candidatosPorTurma[ano][turma])
 
@@ -441,9 +420,7 @@ function confirmar() {
       return
     }
 
-    caixas.forEach((caixa) => {
-      caixa.style.border = "2px solid black"
-    })
+    atualizarCaixas("black")
 
     if (digito1 == "1") {
       gerarPDF()
@@ -461,9 +438,7 @@ function votarBranco() {
     voto = "Branco"
     votos.resultados.push(voto)
 
-    caixas.forEach((caixa) => {
-      caixa.style.border = "2px solid black"
-    })
+    atualizarCaixas("black")
     limparDigitos()
 
     mensagem.innerText = "VOTO CONFIRMADO"
@@ -471,30 +446,21 @@ function votarBranco() {
     audioConfirmacaoVoto.currentTime = 0 // Reseta o áudio, se ele estiver tocando
     audioConfirmacaoVoto.play()
 
-    divCandidatos.classList.add("candidatos-desativados")
-    divCandidatos.classList.remove("candidatos-ativados")
-
-    divCaixasDeEntrada.classList.add("caixas-desativadas")
-    divCaixasDeEntrada.classList.remove("caixas-ativadas")
+    gerenciarDivDeCandidatos(true)
+    gerenciarDivCaixasEntrada(true)
 
     mensagemDeErro.innerText = ""
 
     // Após 2 segundos, restaura o estado para próxima votação
     setTimeout(function () {
-      caixas.forEach((caixa) => {
-        caixa.style.display = "flex"
-        caixa.style.border = "2px solid black"
-      })
+      atualizarCaixas("black", "flex")
       limparDigitos()
 
       mensagem2.innerHTML = ""
       mensagem.innerText = "Digite o número do seu candidato:"
 
-      divCandidatos.classList.remove("candidatos-ativados")
-      divCandidatos.classList.add("candidatos-desativados")
-
-      divCaixasDeEntrada.classList.remove("caixas-desativadas")
-      divCaixasDeEntrada.classList.add("caixas-ativadas")
+      gerenciarDivDeCandidatos(true)
+      gerenciarDivCaixasEntrada(false)
 
       console.log(candidatosPorTurma[ano][turma])
 
@@ -531,14 +497,10 @@ function reiniciarVotacao() {
   mensagem2.innerHTML = ""
   mensagemDeErro.innerText = ""
 
-  caixas.forEach((caixa) => {
-    caixa.style.border = "2px solid black"
-  })
+  atualizarCaixas("black")
 
-  divCandidatos.classList.add("candidatos-desativados")
-  divCandidatos.classList.remove("candidatos-ativados")
-  divCaixasDeEntrada.classList.remove("caixas-ativadas")
-  divCaixasDeEntrada.classList.add("caixas-desativadas")
+  gerenciarDivDeCandidatos(true)
+  gerenciarDivCaixasEntrada(true)
 
   limparDigitos()
 

@@ -17,7 +17,8 @@ let caixas = document.querySelectorAll(".caixa")
 let digitos = document.querySelectorAll(".digito")
 let digito1 = "",
   digito2 = "",
-  digito3 = ""
+  digito3 = "",
+  digito4 = ""
 let divCandidatos = document.querySelector("#candidatos")
 let ano = "",
   turma = "",
@@ -153,6 +154,7 @@ function atualizardigitos() {
   digitos[0].textContent = digito1
   digitos[1].textContent = digito2
   digitos[2].textContent = digito3
+  digitos[3].textContent = digito4
 
   if (mensagem.innerText == "Digite o número do seu candidato:") {
     gerenciarDivDeCandidatos(true)
@@ -164,6 +166,7 @@ function limparDigitos() {
   digito1 = ""
   digito2 = ""
   digito3 = ""
+  digito4 = ""
 
   atualizardigitos()
 }
@@ -176,6 +179,8 @@ function lidarComNúmeroClicado(numero) {
     digito2 = numero
   } else if (digitos[2].innerText === "") {
     digito3 = numero
+  } else if (digitos[3].innerText === "") {
+    digito4 = numero
   }
   atualizardigitos()
 
@@ -183,9 +188,10 @@ function lidarComNúmeroClicado(numero) {
     digito1 !== "" &&
     digito2 !== "" &&
     digito3 !== "" &&
+    digito4 !== "" &&
     mensagem.innerText == "Digite o número do seu candidato:"
   ) {
-    const numeroCandidato = digito1 + digito2 + digito3
+    const numeroCandidato = digito1 + digito2 + digito3 + digito4
 
     // Verifica se o número do candidato é válido
     if (verificarNumeroCandidato(ano, turma, numeroCandidato)) {
@@ -236,10 +242,11 @@ function confirmar() {
       return
     }
 
-    mensagem.innerText = "Digite a turma:"
+    mensagem.innerText = "Digite a turma:" 
     mensagemDeErro.innerText = ""
 
     atualizarCaixas("black", "flex")
+    document.querySelector(".caixa4").style.display = "none"
     limparDigitos()
 
     gerenciarDivCaixasEntrada(false)
@@ -268,7 +275,7 @@ function confirmar() {
       return
     }
 
-    atualizarCaixas("black")
+    atualizarCaixas("black", "flex")
     limparDigitos()
 
     mensagem.innerText = "Digite o número do seu candidato:"
@@ -283,12 +290,12 @@ function confirmar() {
   }
 
   if (mensagem.innerText === "Digite o número do seu candidato:") {
-    if (digito1 == "" || digito2 == "" || digito3 == "") {
+    if (digito1 == "" || digito2 == "" || digito3 == "" || digito4 == "") {
       atualizarCaixas("red")
       return
     }
 
-    voto = digito1 + digito2 + digito3
+    voto = digito1 + digito2 + digito3 + digito4
 
     // Verifica se o número do candidato é válido
     if (verificarNumeroCandidato(ano, turma, voto)) {
@@ -363,6 +370,7 @@ function confirmar() {
         mensagemDeErro.innerText = ""
 
         atualizarCaixas("black", "flex")
+        document.querySelector(".caixa4").style.display = "none"
         limparDigitos()
 
         gerenciarDivCaixasEntrada(false)
